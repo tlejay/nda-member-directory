@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* NDA brand tokens */
+  --color-nda: #f57c1f;
+  --color-nda-dark: #d96409;
+  --color-ink: #0b0b0d;
+  --color-paper: #fff8f1;
+  --font-sans: var(--font-noto-sans-thai), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Scattered small squares — echoes the pixel squares of the NDA logo.
+   One 96px tile on a 12px grid, fading out towards the content. */
+.pixel-field {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' fill='%23f57c1f'%3E%3Crect x='12' y='12' width='12' height='12' opacity='.16'/%3E%3Crect x='60' y='0' width='12' height='12' opacity='.08'/%3E%3Crect x='72' y='36' width='12' height='12' opacity='.2'/%3E%3Crect x='24' y='48' width='12' height='12' opacity='.1'/%3E%3Crect x='48' y='72' width='12' height='12' opacity='.14'/%3E%3Crect x='0' y='84' width='12' height='12' opacity='.07'/%3E%3C/svg%3E");
+  background-size: 96px 96px;
+  mask-image: linear-gradient(to bottom left, black, transparent 70%);
+}
+
+/* Hard-edged offset shadow: cards lift like a pixel sprite, not a soft blur. */
+.card-lift {
+  transition:
+    transform 150ms ease-out,
+    box-shadow 150ms ease-out;
+}
+
+.card-lift:hover,
+.card-lift:focus-within {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 0 var(--color-nda);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-lift {
+    transition: none;
+  }
+}
